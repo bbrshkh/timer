@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { BrowserRouter as Router, Routes, Route  } from 'react-router-dom';
+import Home from './pages/Home';
+import Timer from './pages/Timer';
+import Counter from './pages/Counter';
+import Navbar from './component/Navbar';
+import { store } from './store';
+import { Provider } from 'react-redux';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <Provider store = {store}>
+       <Router>
+        <Routes>
+          <Route path='/' element={<Navbar /> }>
+            <Route index element= {<Home />} />
+            <Route path='/timer' element={<Timer /> } />
+            <Route path='/counter' element={<Counter /> } />
+          </Route>
+        </Routes>
+       </Router>
+      </Provider>
+
+      
+       
     </div>
   );
 }
